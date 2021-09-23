@@ -4,24 +4,33 @@
 def move(board)
   puts board
 
-  # Height and width of the board
-  @height = board[:board][:height]
-  @width = board[:board][:width]
+# Height and width of the board
+@height = board[:board][:height]
+@width = board[:board][:width]
 
-  # all possible moves
-  @possible_moves = ["up", "down", "left", "right"]
+# all possible moves
+@possible_moves = ["up", "down", "left", "right"] 
 
-  # get your snakehead
-  @snakeheadx = board[:you][:head][:x]
-  @snakeheady = board[:you][:head][:y] 
+#get snakes length
+@snakelength = board[:you][:length]
 
-  # get the snakes body and length
-  @snakebody = board[:you][:body]
-  # print @snakebody
-  # Got the idea from https://stackoverflow.com/questions/15784503/ruby-method-to-print-and-neat-an-array
-  p @snakebody
-  puts @snakebody.inspect
-  # Check the snake body and avoid a collision. Checks each body part and see if its in an adjacent square to the head
+# get where food is
+@food = board[:board][:food]
+   
+# get where hazards are
+@hazards = board[:board][:hazards]
+   
+# get your snakehead
+@snakeheadx = board[:you][:head][:x]
+@snakeheady = board[:you][:head][:y] 
+
+ # get the snakes body
+@snakebody = board[:you][:body]
+
+# Got the idea from https://stackoverflow.com/questions/15784503/ruby-method-to-print-and-neat-an-array
+p @snakebody
+puts @snakebody.inspect
+# Check the snake body and avoid a collision. Checks each body part and see if its in an adjacent square to the head
 @snakebody.each {
   |piece|
     puts "x: #{piece[:x]}, y: #{piece[:y]}"
@@ -41,16 +50,6 @@ def move(board)
       puts "No body collisions" 
     end
   }
-
-  @snakelength = board[:you][:length]
-
- # get where food is
- @food = board[:board][:food]
-
- # get where hazards are
-@hazards = board[:board][:hazards]
-
-
 
 # Avoid the board edges
 
@@ -72,7 +71,12 @@ end
 if@snakeheadx == 0
   puts "removing left"
   @possible_moves.delete("left")
-end
+end 
+
+# Prints out the possible moves
+puts "Remaining moves after removing head collisions and walls"
+p @possible_moves
+puts @possible_moves.inspect
 
 move = @possible_moves.sample  
 puts "MOVE: " + move
