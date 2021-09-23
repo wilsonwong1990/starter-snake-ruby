@@ -15,8 +15,15 @@ def move(board)
   # get the snakes body and length
   @snakebody = board[:you][:body]
   # print @snakebody
+  # Got the idea from https://stackoverflow.com/questions/15784503/ruby-method-to-print-and-neat-an-array
   p @snakebody
   puts @snakebody.inspect
+  [@snakebody].each {
+    puts "x: #{@snakebody[0][:x]}, y: #{@snakebody[0][:y]}"
+  }
+  end
+
+
   @snakelength = board[:you][:length]
 
  # get where food is
