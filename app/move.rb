@@ -12,9 +12,11 @@ def move(board)
   @snakeheadx = board[:you][:x]
   @snakeheady = board[:you][:y] 
 
-  # get the snakes body
-  @snakebodyx = board[:you][:body][:x]
-  @snakebodyy = board[:you][:body][:y]
+  # get the snakes body and length
+  @snakebody = board[:you][:body]
+  # print @snakebody
+  p @snakebody
+  puts @snakebody.inspect
   @snakelength = board[:you][:length]
 
  # get where food is
