@@ -13,8 +13,8 @@ def move(board)
   @snakeheady = board[:you][:y] 
 
   # get the snakes body
-  #@snakebodyx = board[:you][:body][:x]
-  #@snakebodyy = board[:you][:body][:y]
+  @snakebodyx = board[:you][:body][:x]
+  @snakebodyy = board[:you][:body][:y]
   @snakelength = board[:you][:length]
 
  # get where food is
@@ -46,6 +46,10 @@ if@snakeheadx == 0
   puts "removing left"
   @possible_moves.delete("left")
 end
+
+# Avoid the snakes body
+# Get the coordinates of the spaces next to the head. Compare that against the snakes body.
+
 
 move = @possible_moves.sample  
 puts "MOVE: " + move
