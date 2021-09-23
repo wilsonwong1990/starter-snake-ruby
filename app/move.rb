@@ -30,18 +30,26 @@ def move(board)
 
 # Avoid the board edges
 
-if (@snakeheadx == @height)
+if @snakeheady == @height -1
+  puts "removing up"
   @possible_moves.delete("up")
 end
-if (@snakeheadx == 0)
+
+if @snakeheady == 0
+  puts "removing down"
   @possible_moves.delete("down")
 end
-if(@snakeheady == @width)
+
+if@snakeheadx == @width -1
+  puts "removing right"
   @possible_moves.delete("right")
 end
-if(@snakeheady == 0)
+
+if(@snakeheadx == 0)
+  puts "removing left"
   @possible_moves.delete("left")
 end
+
 move = @possible_moves.sample  
 puts "MOVE: " + move
 { "move": move }
