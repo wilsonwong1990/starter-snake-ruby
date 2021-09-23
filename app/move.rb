@@ -8,9 +8,12 @@ def move(board)
   @height = board[:board][:height]
   @width = board[:board][:width]
 
+  # all possible moves
+  @possible_moves = ["up", "down", "left", "right"]
+
   # get your snakehead
-  @snakeheadx = board[:you][:x]
-  @snakeheady = board[:you][:y] 
+  @snakeheadx = board[:you][:head][:x]
+  @snakeheady = board[:you][:head][:y] 
 
   # get the snakes body and length
   @snakebody = board[:you][:body]
@@ -18,11 +21,26 @@ def move(board)
   # Got the idea from https://stackoverflow.com/questions/15784503/ruby-method-to-print-and-neat-an-array
   p @snakebody
   puts @snakebody.inspect
-  [@snakebody].each {
-    puts "x: #{@snakebody[0][:x]}, y: #{@snakebody[0][:y]}"
+  # Check the snake body and avoid a collision. Checks each body part and see if its in an adjacent square to the head
+@snakebody.each {
+  |piece|
+    puts "x: #{piece[:x]}, y: #{piece[:y]}"
+    if piece[:x] == @snakeheadx && piece[:y] + 1 == @snakeheady
+      @possible_moves.delete("down")
+      puts "Body is below head, removing down"
+    elsif piece[:x] + 1 == @snakeheadx && piece[:y] == @snakeheady
+      @possible_moves.delete("left")
+      puts "Body is to left of head, removing left"
+    elsif piece[:x] -1 == @snakeheadx && piece[:y] == @snakeheady
+      @possible_moves.delete("right")
+      puts "Body is to the right of head, removing right"
+    elsif piece[:x] == @snakeheadx && piece[:y] - 1 == @snakeheady
+      @possible_moves.delete("up")
+      puts "Body is above head, removing up"
+    else
+      puts "No body collisions" 
+    end
   }
-  end
-
 
   @snakelength = board[:you][:length]
 
@@ -32,7 +50,7 @@ def move(board)
  # get where hazards are
 @hazards = board[:board][:hazards]
 
-@possible_moves = ["up", "down", "left", "right"]
+
 
 # Avoid the board edges
 
@@ -55,10 +73,6 @@ if@snakeheadx == 0
   puts "removing left"
   @possible_moves.delete("left")
 end
-
-# Avoid the snakes body
-# Get the coordinates of the spaces next to the head. Compare that against the snakes body.
-
 
 move = @possible_moves.sample  
 puts "MOVE: " + move
