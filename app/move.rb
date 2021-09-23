@@ -45,7 +45,7 @@ if@snakeheadx == @width -1
   @possible_moves.delete("right")
 end
 
-if(@snakeheadx == 0)
+if@snakeheadx == 0
   puts "removing left"
   @possible_moves.delete("left")
 end
