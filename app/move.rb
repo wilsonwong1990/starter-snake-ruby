@@ -3,10 +3,46 @@
 # TODO: Use the information in board to decide your next move.
 def move(board)
   puts board
-  
-  # Choose a random direction to move in
-  possible_moves = ["up", "down", "left", "right"]
-  move = possible_moves.sample
-  puts "MOVE: " + move
-  { "move": move }
+
+  # Height and width of the board
+  @height = board[:board][:height]
+  @width = board[:board][:width]
+
+  # Get the snakes into an array. Thank you Copilot
+  @snakes = board[:you][:snakes]
+
+  # get your snakehead
+  @snakeheadx = board[:you][:x]
+  @snakeheady = board[:you][:y] 
+
+  # get the snakes body
+  @snakebodyx = board[:you][:body][:x]
+  @snakebodyy = board[:you][:body][:y]
+  @snakelength = board[:you][:body][:length]
+
+ # get where food is
+ @food = board[:board][:food]
+
+ # get where hazards are
+@hazards = board[:board][:hazards]
+
+@possible_moves = ["up", "down", "left", "right"]
+
+# Avoid the board edges
+
+if (@snakeheadx == @height)
+  @possible_moves.delete("up")
+end
+if (@snakeheadx == 0)
+  @possible_moves.delete("down")
+end
+if(@snakeheady == @width)
+  @possible_moves.delete("right")
+end
+if(@snakeheady == 0)
+  @possible_moves.delete("left")
+end
+move = @possible_moves.sample  
+puts "MOVE: " + move
+{ "move": move }
 end
