@@ -8,9 +8,6 @@ def move(board)
   @height = board[:board][:height]
   @width = board[:board][:width]
 
-  # Get the snakes into an array. Thank you Copilot
-  @snakes = board[:you][:snakes]
-
   # get your snakehead
   @snakeheadx = board[:you][:x]
   @snakeheady = board[:you][:y] 
