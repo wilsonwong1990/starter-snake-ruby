@@ -73,6 +73,37 @@ if@snakeheadx == 0
   @possible_moves.delete("left")
 end 
 
+# Set the tail with the last element of the body
+@snaketail = @snakebody.last
+
+# Avoid the tail
+if @snakeheadx == @snaketail[:x] && @snakeheady > snaketail[:y] 
+  @possible_moves.delete("down")
+  puts "Avoiding tail, removing down"
+end
+if @snakeheadx == @snaketail[:x] && @snakeheady < snaketail[:y]
+  @possible_moves.delete("up")
+  puts "Avoiding tail, removing up"
+end
+if @snakeheady == @snaketail[:y] && @snakeheadx > snaketail[:x]
+  @possible_moves.delete("left")
+  puts "Avoiding tail, removing left"
+end
+if @snakeheady == @snaketail[:y] && @snakeheadx < snaketail[:x]
+  @possible_moves.delete("right")
+  puts "Avoiding tail, removing right"
+end
+if @snakeheadx > @snaketail[:x] && @snakeheady > @snaketail[:y]
+  @possible_moves.delete("down")
+  @possible_moves.delete("left")
+  puts "Avoiding tail, removing down and left"
+end
+if @snakeheadx > @snaketail[:x] && @snakeheady < @snaketail[:y]
+  @possible_moves.delete("up")
+  @possible_moves.delete("right")
+  puts "Avoiding tail, removing up and right"
+end
+
 # Prints out the possible moves
 puts "Remaining moves after removing head collisions and walls"
 p @possible_moves
