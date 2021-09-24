@@ -76,38 +76,108 @@ end
 # Set the tail with the last element of the body
 @snaketail = @snakebody.last
 
+# settings these so when there are multiple moves, if the value is no 0, it will stop that being a viable move
+donotmoveup = 0
+donotmovedown = 0
+donotmoveright = 0
+donotmoveleft =0
+
 # Avoid the tail
-if @snakeheadx == @snaketail[:x] && @snakeheady > snaketail[:y] 
+if @snakeheadx == @snaketail[:x] && @snakeheady > @snaketail[:y] 
   @possible_moves.delete("down")
+  donotmovedown = 1
   puts "Avoiding tail, removing down"
 end
-if @snakeheadx == @snaketail[:x] && @snakeheady < snaketail[:y]
+if @snakeheadx == @snaketail[:x] && @snakeheady < @snaketail[:y]
   @possible_moves.delete("up")
+  donotmoveup = 1
   puts "Avoiding tail, removing up"
 end
-if @snakeheady == @snaketail[:y] && @snakeheadx > snaketail[:x]
+if @snakeheady == @snaketail[:y] && @snakeheadx > @snaketail[:x]
   @possible_moves.delete("left")
+  donotmoveleft = 1
   puts "Avoiding tail, removing left"
 end
-if @snakeheady == @snaketail[:y] && @snakeheadx < snaketail[:x]
+if @snakeheady == @snaketail[:y] && @snakeheadx < @snaketail[:x]
   @possible_moves.delete("right")
+  donotmoveright = 1
   puts "Avoiding tail, removing right"
 end
 if @snakeheadx > @snaketail[:x] && @snakeheady > @snaketail[:y]
   @possible_moves.delete("down")
   @possible_moves.delete("left")
+  donotmovedown = 1
+  donotmoveleft = 1
   puts "Avoiding tail, removing down and left"
 end
 if @snakeheadx > @snaketail[:x] && @snakeheady < @snaketail[:y]
   @possible_moves.delete("up")
   @possible_moves.delete("right")
+  donotmoveup = 1
+  donotmoveright = 1
   puts "Avoiding tail, removing up and right"
 end
+
 
 # Prints out the possible moves
 puts "Remaining moves after removing head collisions and walls"
 p @possible_moves
 puts @possible_moves.inspect
+
+# if multiple moves are possible, try get distances from the walls
+@moves_available = Array.new
+@possible_moves.each {
+  |moves|
+  if moves == "up"
+    upvalue = @height - @snakeheady
+    @moves_available.push(upvalue)
+  elsif moves == "down"
+    downvalue = @snakeheady
+    @moves_available.push(downvalue)
+  elsif moves == "left"
+    leftvalue = @snakeheadx
+    @moves_available.push(leftvalue)
+  elsif moves == "right"
+    rightvalue = @width - @snakeheadx
+    @moves_available.push(rightvalue)
+  end
+}
+
+upvalue = @height - @snakeheady
+downvalue = @snakeheady
+leftvalue = @snakeheadx
+rightvalue = @width - @snakeheadx
+
+# check if the values are available then what is the largest value
+# Not quite ready. Maybe look for food instead.
+#if @possible_moves.length > 1 && @moves_available.max == upvalue && donotmoveup == 0
+#  @possible_moves.clear
+#  @possible_moves.push("up")
+#  puts "multiple moves, best move is up"
+#elsif @possible_moves.length > 1 && @moves_available.max == upvalue && donotmoveup > 0
+#  @moves_available.delete(@moves_available.max)
+#end
+#if @possible_moves.length > 1 && @moves_available.max == downvalue && donotmovedown == 0
+#  @possible_moves.clear
+#  @possible_moves.push("down")
+#  puts "multiple moves, best move is down"
+#elsif @possible_moves.length > 1 && @moves_available.max == downvalue && donotmovedown > 0
+#@moves_available.delete(@moves_available.max)
+#end 
+#if @possible_moves.length > 1 && @moves_available.max == leftvalue && donotmoveleft == 0
+#  @possible_moves.clear
+#  @possible_moves.push("left")
+#  puts "multiple moves, best move is left"
+#elsif @possible_moves.length > 1 && @moves_available.max == leftvalue && donotmoveleft > 0
+#@moves_available.delete(@moves_available.max)
+#end
+#if @possible_moves.length > 1 && @moves_available.max == rightvalue && donotmoveright == 0
+#  @possible_moves.clear
+#  @possible_moves.push("right")
+#  puts "multiple moves, best move is right"
+#elsif @possible_moves.length > 1 && @moves_available.max == rightvalue && donotmoveright > 0
+#@moves_available.delete(@moves_available.max)
+#end 
 
 move = @possible_moves.sample  
 puts "MOVE: " + move

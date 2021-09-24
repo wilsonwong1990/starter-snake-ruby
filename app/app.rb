@@ -11,10 +11,10 @@ use Rack::PostBodyContentTypeParser
 get '/' do
   appearance = {
     apiversion: "1",        
-    author: "djdefi",           # TODO: Your Battlesnake Username
-    color: "#993366",     # TODO: Personalize
-    head: "shades",      # TODO: Personalize
-    tail: "mystic-moon",      # TODO: Personalize
+    author: "wilsonwong1990",           # TODO: Your Battlesnake Username
+    color: "#3E338F",     # TODO: Personalize
+    head: "scarf",      # TODO: Personalize
+    tail: "coffee",      # TODO: Personalize
   }
 
   camelcase(appearance).to_json
