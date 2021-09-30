@@ -156,13 +156,14 @@ puts @possible_moves.inspect
 }
 
 #Print out moves available
-p @moves_available
-puts @moves_available.inspect
+#p @moves_available
+
+puts "Moves that are available:" + @moves_available.inspect
 
 @moves_length = @possible_moves.length
 
-puts Moves left were: #{@moves_length}
-puts Max move was : #{@moves_available.max}
+puts "Moves left were:" + @moves_length
+puts "Max move was:" + @moves_available.max
 
 # check if the values are available then what is the largest value
 if @moves_length > 1 && @moves_available.max == @upvalue && @donotmoveup == 0
@@ -185,7 +186,7 @@ end
 
 # check if these if statements work
 
-puts Moves available were: #{@moves_available.inspect}
+puts "Moves available were:" + @moves_available.inspect
 
 move = @possible_moves.sample  
 puts "MOVE: " + move
