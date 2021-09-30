@@ -170,15 +170,18 @@ if @moves_length > 1 && @moves_available.max == @upvalue && @donotmoveup == 0
   @possible_moves.clear
   @possible_moves.push("up")
   puts "multiple moves, best move is up"
-elsif @moves_length > 1 && @moves_available.max == @downvalue && @donotmovedown == 0
+end
+if @moves_length > 1 && @moves_available.max == @downvalue && @donotmovedown == 0
   @possible_moves.clear
   @possible_moves.push("down")
   puts "multiple moves, best move is down"
-elsif @moves_length > 1 && @moves_available.max == @leftvalue && @donotmoveleft == 0
+end
+if @moves_length > 1 && @moves_available.max == @leftvalue && @donotmoveleft == 0
   @possible_moves.clear
   @possible_moves.push("left")
   puts "multiple moves, best move is left"
-elsif @moves_length > 1 && @moves_available.max == @rightvalue && @donotmoveright == 0
+end
+if @moves_length > 1 && @moves_available.max == @rightvalue && @donotmoveright == 0
   @possible_moves.clear
   @possible_moves.push("right")
   puts "multiple moves, best move is right"
