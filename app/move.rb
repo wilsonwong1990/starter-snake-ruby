@@ -101,7 +101,7 @@ if@snakeheadx == 0
 end 
 
 # Check for snake if other snakes are near
-
+puts "Where are the snakes" + @others.inspect
 @others.each {
   |piece|
     puts "x: #{piece[:x]}, y: #{piece[:y]}"
