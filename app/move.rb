@@ -189,6 +189,6 @@ end
 puts "Moves available were:" + @moves_available.inspect
 
 move = @possible_moves.sample  
-puts "MOVE: " + move.to_i.to_s
+puts "MOVE: " + move.to_s
 {"move": move}
 end
