@@ -127,6 +127,14 @@ puts "Remaining moves after removing head collisions and walls"
 p @possible_moves
 puts @possible_moves.inspect 
 
+if @possible_moves.length < 1
+  puts "No moves in array. Repopulating with all moves"
+  @possible_moves.push("up")
+  @possible_moves.push("down")
+  @possible_moves.push("left")
+  @possible_moves.push("right")
+end
+
 #upvalue = @height - @snakeheady
 #downvalue = @snakeheady
 #leftvalue = @snakeheadx
@@ -191,13 +199,7 @@ end
 
 puts "Moves available were:" + @moves_available.inspect
 
-if @possible_moves.length < 1
-  puts "No moves in array. Repopulating with all moves"
-  @possible_moves.push("up")
-  @possible_moves.push("down")
-  @possible_moves.push("left")
-  @possible_moves.push("right")
-end
+
 
 move = @possible_moves.sample  
 puts "MOVE: " + move.to_s
