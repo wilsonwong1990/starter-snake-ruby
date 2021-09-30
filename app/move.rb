@@ -106,20 +106,7 @@ if @snakeheady == @snaketail[:y] && @snakeheadx < @snaketail[:x]
   @donotmoveright = @donotmoveright + 1
   puts "Avoiding tail, removing right"
 end
-if @snakeheadx > @snaketail[:x] && @snakeheady > @snaketail[:y]
-  @possible_moves.delete("down")
-  @possible_moves.delete("left")
-  @donotmovedown = @donotmovedown + 1
-  @donotmoveleft = @donotmoveleft + 1
-  puts "Avoiding tail, removing down and left"
-end
-if @snakeheadx > @snaketail[:x] && @snakeheady < @snaketail[:y]
-  @possible_moves.delete("up")
-  @possible_moves.delete("right")
-  @donotmoveup = @donotmoveup + 1
-  @donotmoveright = @donotmoveright + 1
-  puts "Avoiding tail, removing up and right"
-end
+
 
 
 # Prints out the possible moves
