@@ -162,7 +162,7 @@ puts "Moves that are available:" + @moves_available.inspect
 
 @moves_length = @possible_moves.length
 
-puts "Moves left were:" + @moves_length
+puts "Moves left were:" + @moves_length.to_i.to_s
 puts "Max move was:" + @moves_available.max
 
 # check if the values are available then what is the largest value
