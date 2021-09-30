@@ -188,6 +188,14 @@ end
 
 puts "Moves available were:" + @moves_available.inspect
 
+if @possible_moves.length == 0
+  puts "No moves in array. Repopulating with all moves"
+  @possible_moves.push("up")
+  @possible_moves.push("down")
+  @possible_moves.push("left")
+  @possible_moves.push("right")
+end
+
 move = @possible_moves.sample  
 puts "MOVE: " + move.to_s
 {"move": move}
