@@ -105,11 +105,11 @@ if@snakeheadx == 0
 end 
 
 # Check for snake if other snakes are near
-puts "There are this many snakes" + @othersnakescount.to_s
+puts "There are this many snakes " + @othersnakescount.to_s
 
 while @othersnakescount > 0
-@othersnakesbody = @othersnakes[@othersnakescount][:body]
-@othersnakeshead = @othersnakes[@othersnakescount][:head]
+@othersnakesbody = @othersnakes[@othersnakescount.to_s][:body]
+@othersnakeshead = @othersnakes[@othersnakescount.to_s][:head]
 puts "Where is enemy snake head" + @othersnakeshead.inspect
 puts "Where are enemy snake body" + @othersnakesbody.inspect
 @othersnakesbody.each {
