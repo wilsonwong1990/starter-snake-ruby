@@ -63,7 +63,7 @@ def move(board)
 p @snakebody
 puts @snakebody.inspect
 # Check the snake body and avoid a collision. Checks each body part and see if its in an adjacent square to the head
-@snakebody.body.each {
+@snakebody.each {
   |piece|
     puts "x: #{piece[:x]}, y: #{piece[:y]}"
     if piece[:x] == @spacebelowx && piece[:y] == @spacebelowy
@@ -123,7 +123,7 @@ puts "Where are the snakes" + @othersnakes.inspect
       @possible_moves.delete("up")
       puts "Eek! Snake above. Deleting that move."
     else
-      puts "No snake body parts nearby" 
+      puts "No snake body nearby" 
     end
   }
 
