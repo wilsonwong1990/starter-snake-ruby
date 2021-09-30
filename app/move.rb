@@ -127,7 +127,7 @@ puts "Remaining moves after removing head collisions and walls"
 p @possible_moves
 puts @possible_moves.inspect 
 
-if @possible_moves.length < 1
+if @possible_moves.empty?
   puts "No moves in array. Repopulating with all moves"
   @possible_moves.push("up")
   @possible_moves.push("down")
