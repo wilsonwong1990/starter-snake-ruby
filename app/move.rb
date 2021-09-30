@@ -139,15 +139,19 @@ puts @possible_moves.inspect
   if moves == "up"
     @upvalue = @height - @snakeheady
     @moves_available.push(@upvalue)
+    puts "upvalue: #{@upvalue}"
   elsif moves == "down"
     @downvalue = @snakeheady
     @moves_available.push(@downvalue)
+    puts "downvalue: #{@downvalue}"
   elsif moves == "left"
     @leftvalue = @snakeheadx
     @moves_available.push(@leftvalue)
+    puts "leftvalue: #{@leftvalue}"
   elsif moves == "right"
     @rightvalue = @width - @snakeheadx
     @moves_available.push(@rightvalue)
+    puts "rightvalue: #{@rightvalue}"
   end
 }
 
