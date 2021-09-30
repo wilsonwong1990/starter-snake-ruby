@@ -30,8 +30,12 @@ def move(board)
  # get the snakes body
 @snakebody = board[:you][:body]
 
-# Get other snakes
-@others = board[:board][:snakes]
+# Get other snakes 
+@othersnakes = board[:board][:snakes]
+
+#Get number of other snakes
+@othersnakescount = board[:board][:snakes].length
+
 
 # Think of the moves as a 3x3 grid. The head is in the middle at (2,2). 
 # ---------------
@@ -59,7 +63,7 @@ def move(board)
 p @snakebody
 puts @snakebody.inspect
 # Check the snake body and avoid a collision. Checks each body part and see if its in an adjacent square to the head
-@snakebody.each {
+@snakebody.body.each {
   |piece|
     puts "x: #{piece[:x]}, y: #{piece[:y]}"
     if piece[:x] == @spacebelowx && piece[:y] == @spacebelowy
@@ -101,24 +105,25 @@ if@snakeheadx == 0
 end 
 
 # Check for snake if other snakes are near
-puts "Where are the snakes" + @others.inspect
-@others.each {
+puts "There are this many snakes" + @othersnakescount.to_s
+puts "Where are the snakes" + @othersnakes.inspect
+@othersnakes.each {
   |piece|
-    puts "x: #{piece[:x]}, y: #{piece[:y]}"
-    if piece[:x] == @spacebelowx && piece[:y] == @spacebelowy
+    puts "x: #{piece[:body][:x]}, y: #{piece[:body][:y]}"
+    if piece[:body][:x] == @spacebelowx && piece[:body][:y] == @spacebelowy
       @possible_moves.delete("down")
       puts "Eek! Snake below. Deleting that move."
-    elsif piece[:x] == @spaceleftx && piece[:y] == @spacelefty
+    elsif piece[:body][:x] == @spaceleftx && piece[:body][:y] == @spacelefty
       @possible_moves.delete("left")
       puts "Eek! Snake left. Deleting that move"
-    elsif piece[:x] == @spacerightx && piece[:y] == @spacerighty
+    elsif piece[:body][:x] == @spacerightx && piece[:body][:y] == @spacerighty
       @possible_moves.delete("right")
       puts "Eek! Snake right. Deleting that move"
-    elsif piece[:x] == @spaceabovex && piece[:y] == @spaceabovey
+    elsif piece[:body][:x] == @spaceabovex && piece[:body][:y] == @spaceabovey
       @possible_moves.delete("up")
       puts "Eek! Snake above. Deleting that move."
     else
-      puts "No snakes nearby" 
+      puts "No snake body parts nearby" 
     end
   }
 
