@@ -107,19 +107,19 @@ end
 # Check for snake if other snakes are near
 puts "There are this many snakes" + @othersnakescount.to_s
 puts "Where are the snakes" + @othersnakes.inspect
-@othersnakes.each {
+@othersnakes.body.each {
   |piece|
-    puts "x: #{piece[:body][:x]}, y: #{piece[:body][:y]}"
-    if piece[:body][:x] == @spacebelowx && piece[:body][:y] == @spacebelowy
+    puts "x: #{piece[:x]}, y: #{piece[:y]}"
+    if piece[:x] == @spacebelowx && piece[:y] == @spacebelowy
       @possible_moves.delete("down")
       puts "Eek! Snake below. Deleting that move."
-    elsif piece[:body][:x] == @spaceleftx && piece[:body][:y] == @spacelefty
+    elsif piece[:x] == @spaceleftx && piece[:y] == @spacelefty
       @possible_moves.delete("left")
       puts "Eek! Snake left. Deleting that move"
-    elsif piece[:body][:x] == @spacerightx && piece[:body][:y] == @spacerighty
+    elsif piece[:x] == @spacerightx && piece[:y] == @spacerighty
       @possible_moves.delete("right")
       puts "Eek! Snake right. Deleting that move"
-    elsif piece[:body][:x] == @spaceabovex && piece[:body][:y] == @spaceabovey
+    elsif piece[:x] == @spaceabovex && piece[:y] == @spaceabovey
       @possible_moves.delete("up")
       puts "Eek! Snake above. Deleting that move."
     else
