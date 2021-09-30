@@ -161,6 +161,9 @@ puts @moves_available.inspect
 
 @moves_length = @possible_moves.length
 
+puts Moves left were: #{@moves_length}
+puts Max move was : #{@moves_available.max}
+
 # check if the values are available then what is the largest value
 if @moves_length > 1 && @moves_available.max == @upvalue && @donotmoveup == 0
   @possible_moves.clear
@@ -179,6 +182,10 @@ elsif @moves_length > 1 && @moves_available.max == @rightvalue && @donotmoverigh
   @possible_moves.push("right")
   puts "multiple moves, best move is right"
 end 
+
+# check if these if statements work
+
+puts Moves available were: #{@moves_available.inspect}
 
 move = @possible_moves.sample  
 puts "MOVE: " + move
