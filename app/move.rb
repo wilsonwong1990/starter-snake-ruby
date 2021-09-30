@@ -30,6 +30,31 @@ def move(board)
  # get the snakes body
 @snakebody = board[:you][:body]
 
+# Get other snakes
+@others = board[:board][:snakes]
+
+# Think of the moves as a 3x3 grid. The head is in the middle at (2,2). 
+# ---------------
+# |  |    |     |
+# ---------------
+# |  |head|     |
+# ---------------
+# |  |    |     |
+# ---------------
+# It only has really 3 moves: (2,1), (2,3), (1,2).
+# So we need to check each of those cells to see if something occupies it.
+
+# Generate a list of spaces to check
+@spaceabovex = @snakeheadx 
+@spaceabovey = @snakeheady + 1
+@spaceleftx = @snakeheadx - 1
+@spacelefty = @snakeheady
+@spacerightx = @snakeheadx + 1
+@spacerighty = @snakeheady
+@spacebelowx = @snakeheadx
+@spacebelowy = @snakeheady - 1
+
+# ------
 # Got the idea from https://stackoverflow.com/questions/15784503/ruby-method-to-print-and-neat-an-array
 p @snakebody
 puts @snakebody.inspect
@@ -37,16 +62,16 @@ puts @snakebody.inspect
 @snakebody.each {
   |piece|
     puts "x: #{piece[:x]}, y: #{piece[:y]}"
-    if piece[:x] == @snakeheadx && piece[:y] + 1 == @snakeheady
+    if piece[:x] == @spacebelowx && piece[:y] == @spacebelowy
       @possible_moves.delete("down")
       puts "Body is below head, removing down"
-    elsif piece[:x] + 1 == @snakeheadx && piece[:y] == @snakeheady
+    elsif piece[:x] == @spaceleftx && piece[:y] == @spacelefty
       @possible_moves.delete("left")
       puts "Body is to left of head, removing left"
-    elsif piece[:x] - 1 == @snakeheadx && piece[:y] == @snakeheady
+    elsif piece[:x] == @spacerightx && piece[:y] == @spacerighty
       @possible_moves.delete("right")
       puts "Body is to the right of head, removing right"
-    elsif piece[:x] == @snakeheadx && piece[:y] - 1 == @snakeheady
+    elsif piece[:x] == @spaceabovex && piece[:y] == @spaceabovey
       @possible_moves.delete("up")
       puts "Body is above head, removing up"
     else
@@ -54,8 +79,7 @@ puts @snakebody.inspect
     end
   }
 
-# Avoid the board edges
-
+  # Avoid the board edges
 if @snakeheady == @height - 1
   puts "removing up"
   @possible_moves.delete("up")
@@ -75,6 +99,29 @@ if@snakeheadx == 0
   puts "removing left"
   @possible_moves.delete("left")
 end 
+
+# Check for snake if other snakes are near
+
+@others.each {
+  |piece|
+    puts "x: #{piece[:x]}, y: #{piece[:y]}"
+    if piece[:x] == @spacebelowx && piece[:y] == @spacebelowy
+      @possible_moves.delete("down")
+      puts "Eek! Snake below. Deleting that move."
+    elsif piece[:x] == @spaceleftx && piece[:y] == @spacelefty
+      @possible_moves.delete("left")
+      puts "Eek! Snake left. Deleting that move"
+    elsif piece[:x] == @spacerightx && piece[:y] == @spacerighty
+      @possible_moves.delete("right")
+      puts "Eek! Snake right. Deleting that move"
+    elsif piece[:x] == @spaceabovex && piece[:y] == @spaceabovey
+      @possible_moves.delete("up")
+      puts "Eek! Snake above. Deleting that move."
+    else
+      puts "No snakes nearby" 
+    end
+  }
+
 
 # Set the tail with the last element of the body
 @snaketail = @snakebody.last
@@ -128,66 +175,9 @@ end
 #leftvalue = @snakeheadx
 #rightvalue = @width - @snakeheadx
 
-# if multiple moves are possible, try get distances from the walls
-@moves_available = Array.new
-@possible_moves.each {
-  |moves|
-  if moves == "up"
-    @upvalue = @height - @snakeheady
-    @moves_available.push(@upvalue)
-    puts "upvalue: #{@upvalue}"
-  elsif moves == "down"
-    @downvalue = @snakeheady
-    @moves_available.push(@downvalue)
-    puts "downvalue: #{@downvalue}"
-  elsif moves == "left"
-    @leftvalue = @snakeheadx
-    @moves_available.push(@leftvalue)
-    puts "leftvalue: #{@leftvalue}"
-  elsif moves == "right"
-    @rightvalue = @width - @snakeheadx
-    @moves_available.push(@rightvalue)
-    puts "rightvalue: #{@rightvalue}"
-  end
-}
-
-#Print out moves available
-#p @moves_available
-
-puts "Moves that are available:" + @moves_available.inspect
-
-@moves_length = @possible_moves.length
-
-puts "Moves left were:" + @moves_length.to_i.to_s
-puts "Max move was:" + @moves_available.max.to_i.to_s
-
-# check if the values are available then what is the largest value
-if @moves_length > 1 && @moves_available.max == @upvalue && @donotmoveup == 0
-  @possible_moves.clear
-  @possible_moves.push("up")
-  puts "multiple moves, best move is up"
-end
-if @moves_length > 1 && @moves_available.max == @downvalue && @donotmovedown == 0
-  @possible_moves.clear
-  @possible_moves.push("down")
-  puts "multiple moves, best move is down"
-end
-if @moves_length > 1 && @moves_available.max == @leftvalue && @donotmoveleft == 0
-  @possible_moves.clear
-  @possible_moves.push("left")
-  puts "multiple moves, best move is left"
-end
-if @moves_length > 1 && @moves_available.max == @rightvalue && @donotmoveright == 0
-  @possible_moves.clear
-  @possible_moves.push("right")
-  puts "multiple moves, best move is right"
-end 
-
 # check if these if statements work
 
 puts "Moves available were:" + @moves_available.inspect
-
-
 
 move = @possible_moves.sample  
 puts "MOVE: " + move.to_s
