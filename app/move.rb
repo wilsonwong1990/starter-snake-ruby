@@ -126,8 +126,9 @@ end
 puts "Remaining moves after removing head collisions and walls"
 p @possible_moves
 puts @possible_moves.inspect 
-puts @possible_moves.length
-puts @possible_moves.empty?
+puts "Length of possible_moves: #{@possible_moves.length}"
+puts "Is possible_moves empty: #{@possible_moves.empty?}"
+
 if @possible_moves.empty?
   puts "No moves in array. Repopulating with all moves"
   @possible_moves.push("up")
