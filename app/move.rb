@@ -191,7 +191,7 @@ end
 
 puts "Moves available were:" + @moves_available.inspect
 
-if @possible_moves.length == 0
+if @possible_moves.length < 1
   puts "No moves in array. Repopulating with all moves"
   @possible_moves.push("up")
   @possible_moves.push("down")
