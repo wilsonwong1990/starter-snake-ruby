@@ -108,8 +108,8 @@ end
 puts "There are this many snakes " + @othersnakescount.to_s
 
 while @othersnakescount > 0
-@othersnakesbody = @othersnakes[eval(@othersnakescount.to_i)][:body]
-@othersnakeshead = @othersnakes[eval(@othersnakescount.to_i)][:head]
+@othersnakesbody = @othersnakes[eval(@othersnakescount)][:body]
+@othersnakeshead = @othersnakes[eval(@othersnakescount)][:head]
 puts "Where is enemy snake head" + @othersnakeshead.inspect
 puts "Where are enemy snake body" + @othersnakesbody.inspect
 @othersnakesbody.each {
