@@ -106,8 +106,13 @@ end
 
 # Check for snake if other snakes are near
 puts "There are this many snakes" + @othersnakescount.to_s
-puts "Where are the snakes" + @othersnakes.inspect
-@othersnakes.body.each {
+
+while @othersnakescount > 0
+@othersnakesbody = @othersnakes[@othersnakescount][:body]
+@othersnakeshead = @othersnakes[@othersnakescount][:head]
+puts "Where is enemy snake head" + @othersnakeshead.inspect
+puts "Where are enemy snake body" + @othersnakesbody.inspect
+@othersnakesbody.each {
   |piece|
     puts "x: #{piece[:x]}, y: #{piece[:y]}"
     if piece[:x] == @spacebelowx && piece[:y] == @spacebelowy
@@ -126,6 +131,27 @@ puts "Where are the snakes" + @othersnakes.inspect
       puts "No snake body nearby" 
     end
   }
+@othersnakeshead.each {
+  |piece|
+    puts "x: #{piece[:x]}, y: #{piece[:y]}"
+    if piece[:x] == @spacebelowx && piece[:y] == @spacebelowy
+      @possible_moves.delete("down")
+      puts "Eek! Snake head below. Deleting that move."
+    elsif piece[:x] == @spaceleftx && piece[:y] == @spacelefty
+      @possible_moves.delete("left")
+      puts "Eek! Snake head left. Deleting that move"
+    elsif piece[:x] == @spacerightx && piece[:y] == @spacerighty
+      @possible_moves.delete("right")
+      puts "Eek! Snake head right. Deleting that move"
+    elsif piece[:x] == @spaceabovex && piece[:y] == @spaceabovey
+      @possible_moves.delete("up")
+      puts "Eek! Snake head above. Deleting that move."
+    else
+      puts "No snake head nearby" 
+    end
+  }
+@othersnakescount = @othersnakescount - 1
+end
 
 
 # Set the tail with the last element of the body
