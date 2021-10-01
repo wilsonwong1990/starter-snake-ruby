@@ -204,9 +204,10 @@ end
       @possible_moves.push("up")
       puts "Yo! There's food Going up"
     else
-      puts "No snake body nearby" 
+      puts "No food" 
     end
   }
+
 
 # Prints out the possible moves
 puts "Remaining moves after removing collisions, snakes, walls and searching for food"
