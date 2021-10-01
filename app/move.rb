@@ -159,7 +159,7 @@ puts "Where are enemy snake body" + @othersnakesbody.inspect
 @donotmoveup = 0
 @donotmovedown = 0
 @donotmoveright = 0
-@donotmoveleft =0
+@donotmoveleft = 0
 
 # Avoid the tail
 if @snakeheadx == @snaketail[:x] && @snakeheady > @snaketail[:y] 
@@ -183,14 +183,38 @@ if @snakeheady == @snaketail[:y] && @snakeheadx < @snaketail[:x]
   puts "Avoiding tail, removing right"
 end
 
-
+# Check if next to food and so, move to it, overriding other moves
+@food.each {
+  |foodpiece|
+    puts "Food coordinates x: #{foodpiece[:x]}, y: #{foodpiece[:y]}"
+    if foodpiece[:x] == @spacebelowx && foodpiece[:y] == @spacebelowy
+      @possible_moves.clear
+      @possible_moves.push("down")
+      puts "Yo! There's food. Going down"
+    elsif foodpiece[:x] == @spaceleftx && foodpiece[:y] == @spacelefty
+      @possible_moves.clear
+      @possible_moves.push("left")
+      puts "Yo! There's food. Going left"
+    elsif foodpiece[:x] == @spacerightx && foodpiece[:y] == @spacerighty
+      @possible_moves.clear
+      @possible_moves.push("right")
+      puts "Yo! There's food. Going right"
+    elsif foodpiece[:x] == @spaceabovex && foodpiece[:y] == @spaceabovey
+      @possible_moves.clear
+      @possible_moves.push("up")
+      puts "Yo! There's food Going up"
+    else
+      puts "No snake body nearby" 
+    end
+  }
 
 # Prints out the possible moves
-puts "Remaining moves after removing head collisions and walls"
+puts "Remaining moves after removing collisions, snakes, walls and searching for food"
 puts @possible_moves.inspect 
 puts "Length of possible_moves: #{@possible_moves.length}"
 puts "Is possible_moves empty: #{@possible_moves.empty?}"
 
+# Safety net. If there are no moves, then just move randomly
 if @possible_moves.empty? == true
   puts "No moves in array. Repopulating with all moves"
   @possible_moves.push("up")
@@ -198,15 +222,6 @@ if @possible_moves.empty? == true
   @possible_moves.push("left")
   @possible_moves.push("right")
 end
-
-#upvalue = @height - @snakeheady
-#downvalue = @snakeheady
-#leftvalue = @snakeheadx
-#rightvalue = @width - @snakeheadx
-
-# check if these if statements work
-
-puts "Moves available were:" + @moves_available.inspect
 
 move = @possible_moves.sample  
 puts "MOVE: " + move.to_s
