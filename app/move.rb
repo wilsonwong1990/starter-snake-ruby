@@ -126,6 +126,22 @@ puts "Where are enemy snake body" + @othersnakesbody.inspect
     elsif otherpiece[:x] == @spaceabovex && otherpiece[:y] == @spaceabovey
       @possible_moves.delete("up")
       puts "Eek! Snake above. Deleting that move."
+    elsif otherpiece[:x] == @snakeheadx - 1 && otherpiece[:y] == @snakeheady + 1
+      @possible_moves.delete("up")
+      @possible_moves.delete("left")
+      puts "Eek! Snake left and up. Deleting that move."
+    elsif otherpiece[:x] == @snakeheadx + 1 && otherpiece[:y] == @snakeheady + 1
+      @possible_moves.delete("up")
+      @possible_moves.delete("right")
+      puts "Eek! Snake right and up. Deleting that move."
+    elsif otherpiece[:x] == @snakeheadx - 1 && otherpiece[:y] == @snakeheady - 1
+      @possible_moves.delete("down")
+      @possible_moves.delete("left")
+      puts "Eek! Snake left and down. Deleting that move."
+    elsif otherpiece[:x] == @snakeheadx + 1 && otherpiece[:y] == @snakeheady - 1
+      @possible_moves.delete("down")
+      @possible_moves.delete("right")
+      puts "Eek! Snake right and down. Deleting that move."
     else
       puts "No snake body nearby" 
     end
