@@ -112,18 +112,18 @@ puts "There are this many snakes " + @othersnakescount.to_s
 puts "Where is enemy snake head" + @othersnakeshead.inspect
 puts "Where are enemy snake body" + @othersnakesbody.inspect
 @othersnakesbody.each {
-  |piece|
-    puts "x: #{piece[:x]}, y: #{piece[:y]}"
-    if piece[:x] == @spacebelowx && piece[:y] == @spacebelowy
+  |otherpiece|
+    puts "x: #{otherpiece[:x]}, y: #{otherpiece[:y]}"
+    if otherpiece[:x] == @spacebelowx && otherpiece[:y] == @spacebelowy
       @possible_moves.delete("down")
       puts "Eek! Snake below. Deleting that move."
-    elsif piece[:x] == @spaceleftx && piece[:y] == @spacelefty
+    elsif otherpiece[:x] == @spaceleftx && otherpiece[:y] == @spacelefty
       @possible_moves.delete("left")
       puts "Eek! Snake left. Deleting that move"
-    elsif piece[:x] == @spacerightx && piece[:y] == @spacerighty
+    elsif otherpiece[:x] == @spacerightx && otherpiece[:y] == @spacerighty
       @possible_moves.delete("right")
       puts "Eek! Snake right. Deleting that move"
-    elsif piece[:x] == @spaceabovex && piece[:y] == @spaceabovey
+    elsif otherpiece[:x] == @spaceabovex && otherpiece[:y] == @spaceabovey
       @possible_moves.delete("up")
       puts "Eek! Snake above. Deleting that move."
     else
@@ -131,18 +131,18 @@ puts "Where are enemy snake body" + @othersnakesbody.inspect
     end
   }
 @othersnakeshead.each {
-  |piece|
-    puts "x: #{piece[:x]}, y: #{piece[:y]}"
-    if piece[:x] == @spacebelowx && piece[:y] == @spacebelowy
+  |headpiece|
+    puts "x: #{headpiece[:x]}, y: #{headpiece[:y]}"
+    if headpiece[:x] == @spacebelowx && headpiece[:y] == @spacebelowy
       @possible_moves.delete("down")
       puts "Eek! Snake head below. Deleting that move."
-    elsif piece[:x] == @spaceleftx && piece[:y] == @spacelefty
+    elsif headpiece[:x] == @spaceleftx && headpiece[:y] == @spacelefty
       @possible_moves.delete("left")
       puts "Eek! Snake head left. Deleting that move"
-    elsif piece[:x] == @spacerightx && piece[:y] == @spacerighty
+    elsif headpiece[:x] == @spacerightx && headpiece[:y] == @spacerighty
       @possible_moves.delete("right")
       puts "Eek! Snake head right. Deleting that move"
-    elsif piece[:x] == @spaceabovex && piece[:y] == @spaceabovey
+    elsif headpiece[:x] == @spaceabovex && headpiece[:y] == @spaceabovey
       @possible_moves.delete("up")
       puts "Eek! Snake head above. Deleting that move."
     else
