@@ -43,7 +43,7 @@ def move(board)
 # ---------------
 # |  |head|     |
 # ---------------
-# |  |    |     |
+# |  | tail|     |
 # ---------------
 # It only has really 3 moves: (2,1), (2,3), (1,2).
 # So we need to check each of those cells to see if something occupies it.
@@ -113,7 +113,7 @@ puts "Where is enemy snake head" + @othersnakeshead.inspect
 puts "Where are enemy snake body" + @othersnakesbody.inspect
 @othersnakesbody.each {
   |otherpiece|
-    puts "x: #{otherpiece[:x]}, y: #{otherpiece[:y]}"
+    puts "x: #{otherpiece[:x].to_i}, y: #{otherpiece[:y].to_i}"
     if otherpiece[:x] == @spacebelowx && otherpiece[:y] == @spacebelowy
       @possible_moves.delete("down")
       puts "Eek! Snake below. Deleting that move."
@@ -132,7 +132,7 @@ puts "Where are enemy snake body" + @othersnakesbody.inspect
   }
 @othersnakeshead.each {
   |headpiece|
-    puts "x: #{headpiece[:x]}, y: #{headpiece[:y]}"
+    puts "x: #{headpiece[:x].to_i}, y: #{headpiece[:y].to_i}"
     if headpiece[:x] == @spacebelowx && headpiece[:y] == @spacebelowy
       @possible_moves.delete("down")
       puts "Eek! Snake head below. Deleting that move."
