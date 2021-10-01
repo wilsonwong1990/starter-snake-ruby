@@ -107,7 +107,6 @@ end
 # Check for snake if other snakes are near
 puts "There are this many snakes " + @othersnakescount.to_s
 
-while @othersnakescount > 0
 @othersnakesbody = @othersnakes.map { |s| s[:body] }
 @othersnakeshead = @othersnakes.map { |s| s[:head] }
 puts "Where is enemy snake head" + @othersnakeshead.inspect
@@ -150,8 +149,7 @@ puts "Where are enemy snake body" + @othersnakesbody.inspect
       puts "No snake head nearby" 
     end
   }
-@othersnakescount = @othersnakescount - 1
-end
+
 
 
 # Set the tail with the last element of the body
