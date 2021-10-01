@@ -107,13 +107,13 @@ end
 # Check for snake if other snakes are near
 puts "There are this many snakes " + @othersnakescount.to_s
 
-@othersnakesbody = @othersnakes.map { |s| s[:body] }
-@othersnakeshead = @othersnakes.map { |s| s[:head] }
+@othersnakesbody = @othersnakes.map { |s| s[:body] }.flatten
+@othersnakeshead = @othersnakes.map { |s| s[:head] }.flatten
 puts "Where is enemy snake head" + @othersnakeshead.inspect
 puts "Where are enemy snake body" + @othersnakesbody.inspect
 @othersnakesbody.each {
   |otherpiece|
-    puts "x: #{otherpiece[:x].to_i}, y: #{otherpiece[:y].to_i}"
+    puts "x: #{otherpiece[:x]}, y: #{otherpiece[:y]}"
     if otherpiece[:x] == @spacebelowx && otherpiece[:y] == @spacebelowy
       @possible_moves.delete("down")
       puts "Eek! Snake below. Deleting that move."
