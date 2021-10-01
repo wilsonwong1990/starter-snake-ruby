@@ -106,7 +106,6 @@ end
 
 # Check for snake if other snakes are near
 puts "There are this many snakes " + @othersnakescount.to_s
-puts "These are the names of the snakes" + @othersnakes.name
 
 while @othersnakescount > 0
 @othersnakesbody = @othersnakes.map { |s| s[:body] }
