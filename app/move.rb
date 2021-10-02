@@ -286,7 +286,9 @@ end
       puts "Food to the left, down + #{@fooddistance}"
     end
   end
-}
+} 
+
+
 
 # Prints out the possible moves
 puts "Remaining moves after removing collisions, snakes, walls and searching for food"
@@ -298,7 +300,40 @@ puts "down score:" + @downscore.to_s
 puts "left score:" + @leftscore.to_s
 puts "right score:" + @rightscore.to_s
 
+@scores = [@upscore, @downscore, @leftscore, @rightscore] 
+
+# If the there is a tie between min and max move, use wall distance to break the tie
+if @scores.max == @scores.min
+  puts "Tie between max and min"
+  @scores.each {
+    |score|
+      if score == @upscore
+        # find distance from wall
+        @wallupdistance = @height - @snakeheady
+        @upscore = @upscore + @wallupdistance
+        puts "up score + wall up distance: #{@upscore}"
+      elsif score == @downscore
+        # find distance from wall
+        @walldowndistance = @snakeheady - @height
+        @downscore = @downscore + @walldowndistance
+        puts "down score + wall down distance: #{@downscore}"
+      elsif score == @leftscore
+        # find distance from wall
+        @wallleftdistance = @width - @snakeheadx
+        @leftscore = @leftscore + @wallleftdistance
+        puts "left score + wall left distance: #{@leftscore}"
+      elsif score == @rightscore
+        # find distance from wall
+        @wallrightdistance = @snakeheadx - @width
+        @rightscore = @rightscore + @wallrightdistance
+        puts "right score + wall right distance: #{@rightscore}"
+      end
+    }
+# reset the scores with new values
+@scores.clear
 @scores = [@upscore, @downscore, @leftscore, @rightscore]
+
+
 puts "best score is:" + @scores.max.to_s
 # Use scoring if there is more than 1 move
 if @possible_moves.length > 1
