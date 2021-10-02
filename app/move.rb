@@ -255,10 +255,10 @@ puts "Remaining moves after removing collisions, snakes, walls and searching for
 puts @possible_moves.inspect 
 puts "Length of possible_moves: #{@possible_moves.length}"
 puts "Is possible_moves empty: #{@possible_moves.empty?}"
-puts "up score:" + @upscore.to_i
-puts "down score:" + @downscore.to_i
-puts "left score:" + @leftscore.to_i
-puts "right score:" + @rightscore.to_i
+puts "up score:" + @upscore.to_s
+puts "down score:" + @downscore.to_s
+puts "left score:" + @leftscore.to_s
+puts "right score:" + @rightscore.to_s
 
 @scores = [@upscore, @downscore, @leftscore, @rightscore]
 
