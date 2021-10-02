@@ -254,36 +254,36 @@ end
   |foodpiece|
     puts "Food coordinates x: #{foodpiece[:x]}, y: #{foodpiece[:y]}"
   if foodpiece[:x] == @snakeheadx
-    # food is to the right
+    # food is to above
     if foodpiece[:y] > @snakeheady
       @fooddistance = foodpiece[:y] - @snakeheady
       # Adjusting the distance to subtract from the board size.
       @fooddistance = @height - @fooddistance
-      @rightscore = @rightscore + @fooddistance
-      puts "Food to the right, right + #{@fooddistance}"
+      @upscore = @upscore + @fooddistance
+      puts "Food to above, above + #{@fooddistance}"
     elsif foodpiece[:y] < @snakeheady
-      # food is to the left
+      # food is below
       @fooddistance = @snakeheady - foodpiece[:y]
       # Adjusting the distance to subtract from the board size.
       @fooddistance = @height - @fooddistance
-      @leftscore = @leftscore + @fooddistance
-      puts "Food to the left, left + #{@fooddistance}"
+      @downscore = @downscore + @fooddistance
+      puts "Food to the below, below + #{@fooddistance}"
     end
   elsif foodpiece[:y] == @snakeheady
-    # food is above
+    # food is to the right
     if foodpiece[:x] > @snakeheadx
       @fooddistance = foodpiece[:x] - @snakeheadx
       # Adjusting the distance to subtract from the board size.
       @fooddistance = @width - @fooddistance
-      @upscore = @upscore + @fooddistance
-      puts "Food above, up + #{@fooddistance}"
+      @rightscore = @rightscore + @fooddistance
+      puts "Food is to the right, right + #{@fooddistance}"
     elsif foodpiece[:x] < @snakeheadx
-      # food is below
+      # food is to the left
       @fooddistance = @snakeheadx - foodpiece[:x]
       # Adjusting the distance to subtract from the board size.
       @fooddistance = @width - @fooddistance
-      @downscore = @downscore + @fooddistance
-      puts "Food below, down + #{@fooddistance}"
+      @leftscore = @leftscore + @fooddistance
+      puts "Food to the left, down + #{@fooddistance}"
     end
   end
 }
