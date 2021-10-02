@@ -297,23 +297,23 @@ puts "up score:" + @upscore.to_s
 puts "down score:" + @downscore.to_s
 puts "left score:" + @leftscore.to_s
 puts "right score:" + @rightscore.to_s
-
+puts "best score is:" + scores.max.to_s
 @scores = [@upscore, @downscore, @leftscore, @rightscore]
 
 # Use scoring if there is more than 1 move
 if @possible_moves.length > 1
   @possible_moves.each {
     |move|
-      if move == "up" && @upscore == @scores.max.to_i
+      if move == "up" && @upscore == @scores.max
         @possible_moves.clear
         @possible_moves.push("up")
-      elsif move == "down" && @downscore == @scores.max.to_i
+      elsif move == "down" && @downscore == @scores.max
         @possible_moves.clear
         @possible_moves.push("down")
-      elsif move == "left" && @leftscore == @scores.max.to_i
+      elsif move == "left" && @leftscore == @scores.max
         @possible_moves.clear
         @possible_moves.push("left")
-      elsif move == "right" && @rightscore == @scores.max.to_i
+      elsif move == "right" && @rightscore == @scores.max
         @possible_moves.clear
         @possible_moves.push("right")
       end
