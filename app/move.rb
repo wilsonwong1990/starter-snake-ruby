@@ -297,9 +297,9 @@ puts "up score:" + @upscore.to_s
 puts "down score:" + @downscore.to_s
 puts "left score:" + @leftscore.to_s
 puts "right score:" + @rightscore.to_s
-puts "best score is:" + scores.max.to_s
-@scores = [@upscore, @downscore, @leftscore, @rightscore]
 
+@scores = [@upscore, @downscore, @leftscore, @rightscore]
+puts "best score is:" + scores.max.to_s
 # Use scoring if there is more than 1 move
 if @possible_moves.length > 1
   @possible_moves.each {
