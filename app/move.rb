@@ -279,6 +279,7 @@ if @possible_moves.length > 1
         @possible_moves.push("right")
       end
   }
+end
 
 # Safety net. If there are no moves, then just move randomly
 if @possible_moves.empty? == true
