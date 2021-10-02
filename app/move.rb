@@ -228,7 +228,7 @@ if @snakeheady == @snaketail[:y] && @snakeheadx < @snaketail[:x]
   puts "Trying to avoid tail, right -5"
 end
 
-# Check if next to food and so, move to it, overriding other moves
+# Check if next to food and add 10 to score
 @food.each {
   |foodpiece|
     puts "Food coordinates x: #{foodpiece[:x]}, y: #{foodpiece[:y]}"
@@ -249,6 +249,44 @@ end
     end
   }
 
+# How much food in each direction
+@food.each {
+  |foodpiece|
+    puts "Food coordinates x: #{foodpiece[:x]}, y: #{foodpiece[:y]}"
+  if foodpiece[:x] == @snakeheadx
+    # food is to the right
+    if foodpiece[:y] > @snakeheady
+      @fooddistance = foodpiece[:y] - @snakeheady
+      # Adjusting the distance to subtract from the board size.
+      @fooddistance = @height - @fooddistance
+      @rightscore = @rightscore + @fooddistance
+      puts "Food to the right, right + #{@fooddistance}"
+    elsif foodpiece[:y] < @snakeheady
+      # food is to the left
+      @fooddistance = @snakeheady - foodpiece[:y]
+      # Adjusting the distance to subtract from the board size.
+      @fooddistance = @height - @fooddistance
+      @leftscore = @leftscore + @fooddistance
+      puts "Food to the left, left + #{@fooddistance}"
+    end
+  elsif foodpiece[:y] == @snakeheady
+    # food is above
+    if foodpiece[:x] > @snakeheadx
+      @fooddistance = foodpiece[:x] - @snakeheadx
+      # Adjusting the distance to subtract from the board size.
+      @fooddistance = @width - @fooddistance
+      @upscore = @upscore + @fooddistance
+      puts "Food above, up + #{@fooddistance}"
+    elsif foodpiece[:x] < @snakeheadx
+      # food is below
+      @fooddistance = @snakeheadx - foodpiece[:x]
+      # Adjusting the distance to subtract from the board size.
+      @fooddistance = @width - @fooddistance
+      @downscore = @downscore + @fooddistance
+      puts "Food below, down + #{@fooddistance}"
+    end
+  end
+}
 
 # Prints out the possible moves
 puts "Remaining moves after removing collisions, snakes, walls and searching for food"
@@ -262,6 +300,7 @@ puts "right score:" + @rightscore.to_s
 
 @scores = [@upscore, @downscore, @leftscore, @rightscore]
 
+# Use scoring if there is more than 1 move
 if @possible_moves.length > 1
   @possible_moves.each {
     |move|
