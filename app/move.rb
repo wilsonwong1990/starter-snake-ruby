@@ -332,6 +332,8 @@ end
     end
   }
 
+  # Add snake head checking two spaces away
+
 # Prints out the possible moves
 puts "Remaining moves after removing collisions, snakes, walls and searching for food"
 puts @possible_moves.inspect 
@@ -374,7 +376,19 @@ if @scores.max == @scores.min
 end
 # reset the scores with new values
 @scores.clear
-@scores = [@upscore, @downscore, @leftscore, @rightscore]
+@possible_moves.each {
+  |move|
+    if move == "up"
+      @scores.push(@upscore)
+    elsif move == "down"
+      @scores.push(@downscore)
+    elsif move == "left"
+      @scores.push(@leftscore)
+    elsif move == "right"
+      @scores.push(@rightscore)
+    end
+  }
+
 
 
 puts "best score is:" + @scores.max.to_s
