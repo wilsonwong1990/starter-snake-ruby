@@ -329,6 +329,7 @@ if @scores.max == @scores.min
         puts "right score + wall right distance: #{@rightscore}"
       end
     }
+end
 # reset the scores with new values
 @scores.clear
 @scores = [@upscore, @downscore, @leftscore, @rightscore]
