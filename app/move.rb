@@ -298,12 +298,13 @@ end
     if hazardpiece[:x] <= @snakeheadx 
       if @health > 16
       @leftscore = @leftscore - 0.5
-      puts "Hazard to left, down -.5"
+      puts "Hazard to left, left -.5"
       elsif @health < 16
       @leftscore = @leftscore - 100
       puts "Hazard to left and health is low, -100 to left"
       end
-    elsif hazardpiece[:x] >= @snakeheadx
+    end
+    if hazardpiece[:x] >= @snakeheadx
       if @health > 16
       @rightscore = @rightscore - 0.5
       puts "Hazard to the right, right -.5"
@@ -311,7 +312,8 @@ end
       @rightscore = @rightscore - 100
       puts "Hazard to right and health is low, -100 to right"
       end
-    elsif hazardpiece[:y] <= @snakeheady
+    end
+    if hazardpiece[:y] <= @snakeheady
       if @health > 16
       @downscore = @downscore - 0.5
       puts "Hazard below, down -.5"
@@ -319,7 +321,8 @@ end
       @downscore = @downscore - 100
       puts "Hazard below and health is low, -100 to down"
       end
-    elsif hazardpiece[:y] >= @snakeheady 
+    end
+    if hazardpiece[:y] >= @snakeheady 
       if @health > 16
       @upscore = @upscore - 0.5
       puts "Hazard above, up -.5"
@@ -327,6 +330,7 @@ end
       @upscore = @upscore - 100
       puts "Hazard above and health is low, -100 to up"
       end
+    end
     else
       puts "No hazards adjacent" 
     end
