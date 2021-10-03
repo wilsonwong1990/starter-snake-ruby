@@ -295,34 +295,34 @@ end
 @hazards.each {
   |hazardpiece|
     puts "Hazard coordinates x: #{foodpiece[:x]}, y: #{foodpiece[:y]}"
-    if hazardpiece[:x] == @snakeheadx && hazardpiece[:y] == @snakeheady - 1
+    if hazardpiece[:x] <= @snakeheadx 
       if @health > 16
-      @downscore = @downscore + -2
-      puts "Hazard below, down -2"
+      @leftscore = @leftscore - 0.5
+      puts "Hazard to left, down -.5"
+      elsif @health < 16
+      @leftscore = @leftscore - 100
+      puts "Hazard to left and health is low, -100 to left"
+      end
+    elsif hazardpiece[:x] >= @snakeheadx
+      if @health > 16
+      @rightscore = @rightscore - 0.5
+      puts "Hazard to the right, right -.5"
+      elsif @health < 16
+      @rightscore = @rightscore - 100
+      puts "Hazard to right and health is low, -100 to right"
+      end
+    elsif hazardpiece[:y] <= @snakeheady
+      if @health > 16
+      @downscore = @downscore - 0.5
+      puts "Hazard below, down -.5"
       elsif @health < 16
       @downscore = @downscore - 100
       puts "Hazard below and health is low, -100 to down"
       end
-    elsif hazardpiece[:x] == @snakeheadx - 1 && hazardpiece[:y] == @snakeheady
+    elsif hazardpiece[:y] >= @snakeheady 
       if @health > 16
-      @leftscore = @leftscore - 2
-      puts "Hazard left, left -2"
-      elsif @health < 16
-      @leftscore = @leftscore - 100
-      puts "Hazard left and health is low, -100 to left"
-      end
-    elsif hazardpiece[:x] == @snakeheadx + 1 && hazardpiece[:y] == @snakeheady
-      if @health > 16
-      @rightscore = @rightscore - 2
-      puts "Hazard right, right -2"
-      elsif @health < 16
-      @rightscore = @rightscore - 100
-      puts "Hazard right and health is low, -100 to right"
-      end
-    elsif hazardpiece[:x] == @snakeheadx && hazardpiece[:y] == @snakeheady + 1
-      if @health > 16
-      @upscore = @upscore - 2
-      puts "Hazard above, up -2"
+      @upscore = @upscore - 0.5
+      puts "Hazard above, up -.5"
       elsif @health < 16
       @upscore = @upscore - 100
       puts "Hazard above and health is low, -100 to up"
