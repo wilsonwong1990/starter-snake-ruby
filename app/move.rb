@@ -331,9 +331,6 @@ end
       puts "Hazard above and health is low, -100 to up"
       end
     end
-    else
-      puts "No hazards adjacent" 
-    end
   }
 
   # Add snake head checking two spaces away
