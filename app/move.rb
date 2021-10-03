@@ -294,7 +294,7 @@ end
 # Check for hazards
 @hazards.each {
   |hazardpiece|
-    puts "Hazard coordinates x: #{foodpiece[:x]}, y: #{foodpiece[:y]}"
+    puts "Hazard coordinates x: #{hazardpiece[:x]}, y: #{hazardpiece[:y]}"
     if hazardpiece[:x] <= @snakeheadx 
       if @health > 16
       @leftscore = @leftscore - 0.5
