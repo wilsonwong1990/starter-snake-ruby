@@ -36,6 +36,9 @@ def move(board)
 #Get number of other snakes
 @othersnakescount = board[:board][:snakes].length
 
+#Get snake health 
+@health = board[:you][:health]
+
 
 # Think of the moves as a 3x3 grid. The head is in the middle at (2,2). 
 # ---------------
@@ -288,7 +291,46 @@ end
   end
 } 
 
-
+# Check for hazards
+@hazards.each {
+  |hazardpiece|
+    puts "Hazard coordinates x: #{foodpiece[:x]}, y: #{foodpiece[:y]}"
+    if hazardpiece[:x] == @snakeheadx && hazardpiece[:y] == @snakeheady - 1
+      if @health > 16
+      @downscore = @downscore + -2
+      puts "Hazard below, down -2"
+      elsif @health < 16
+      @downscore = @downscore - 100
+      puts "Hazard below and health is low, -100 to down"
+      end
+    elsif hazardpiece[:x] == @snakeheadx - 1 && hazardpiece[:y] == @snakeheady
+      if @health > 16
+      @leftscore = @leftscore - 2
+      puts "Hazard left, left -2"
+      elsif @health < 16
+      @leftscore = @leftscore - 100
+      puts "Hazard left and health is low, -100 to left"
+      end
+    elsif hazardpiece[:x] == @snakeheadx + 1 && hazardpiece[:y] == @snakeheady
+      if @health > 16
+      @rightscore = @rightscore - 2
+      puts "Hazard right, right -2"
+      elsif @health < 16
+      @rightscore = @rightscore - 100
+      puts "Hazard right and health is low, -100 to right"
+      end
+    elsif hazardpiece[:x] == @snakeheadx && hazardpiece[:y] == @snakeheady + 1
+      if @health > 16
+      @upscore = @upscore - 2
+      puts "Hazard above, up -2"
+      elsif @health < 16
+      @upscore = @upscore - 100
+      puts "Hazard above and health is low, -100 to up"
+      end
+    else
+      puts "No hazards adjacent" 
+    end
+  }
 
 # Prints out the possible moves
 puts "Remaining moves after removing collisions, snakes, walls and searching for food"
